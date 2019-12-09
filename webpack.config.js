@@ -5,25 +5,27 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const NODE_ENV = process.env.NODE_ENV || 'production'
 const isDev = NODE_ENV === 'development'
 const isProd = NODE_ENV === 'production'
+const distPath = path.join(__dirname, '/public/build')
+const publicPath = path.join(distPath, '/')
 
 const webpackConfig = {
   /**
    * Директория относительно которой производится
    * поиск входных точек
    */
-  context: path.resolve(__dirname, 'app'),
+  context: path.join(__dirname, 'app'),
 
   entry: {
     'app': './index.js'
   },
 
   output: {
-    path: path.resolve(__dirname, 'public/build'),
+    path: distPath,
     /**
      * Путь из которого будут подгружатся динамические модули,
      * обязательно со слешем вконце
      */
-    publicPath: path.resolve(__dirname, 'public/build') + '/',
+    publicPath,
     filename: '[name].build.js'
   },
 
@@ -105,6 +107,11 @@ const webpackConfig = {
         ]
       }
     ]
+  },
+
+  devServer: {
+    port: 9000,
+    contentBase: path.join(__dirname, '/public')
   }
 }
 
