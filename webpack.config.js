@@ -5,8 +5,6 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const NODE_ENV = process.env.NODE_ENV || 'production'
 const isDev = NODE_ENV === 'development'
 const isProd = NODE_ENV === 'production'
-const distPath = path.join(__dirname, '/public/build')
-const publicPath = path.join(distPath, '/')
 
 const webpackConfig = {
   /**
@@ -20,12 +18,12 @@ const webpackConfig = {
   },
 
   output: {
-    path: distPath,
+    path: path.join(__dirname, '/dist'),
     /**
-     * Путь из которого будут подгружатся динамические модули,
+     * Полный путь из которого будут подгружатся динамические модули,
      * обязательно со слешем вконце
      */
-    publicPath,
+    publicPath: '/dist/',
     filename: '[name].build.js'
   },
 
@@ -101,7 +99,7 @@ const webpackConfig = {
             options: {
               name: '[path][name].[ext]',
               outputPath: 'static/assets/',
-              publicPath: 'build/static/assets/'
+              publicPath: '/dist/static/assets/'
             }
           }
         ]
@@ -111,7 +109,15 @@ const webpackConfig = {
 
   devServer: {
     port: 9000,
-    contentBase: path.join(__dirname, '/public')
+    /**
+     * По-сути корневая директория сервера
+     */
+    contentBase: __dirname,
+
+    /**
+     * По какому пути относительно корня сервера, будет доступен / положен билд
+     */
+    publicPath: '/dist/'
   }
 }
 
