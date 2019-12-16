@@ -129,7 +129,7 @@ const webpackConfig = {
     publicPath: '/dist/',
 
     /**
-     * Реждим hot replacement
+     * Режим hot replacement
      */
     hot: true
   }
