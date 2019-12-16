@@ -34,7 +34,7 @@ const webpackConfig = {
   /**
    * Следит за изменениями в файле и запускуает пересборку
    */
-  watch: isDev,
+  watch: false,
 
   plugins: [
     /**
