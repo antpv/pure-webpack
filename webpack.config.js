@@ -13,8 +13,12 @@ const webpackConfig = {
    */
   context: path.join(__dirname, 'app'),
 
+  /**
+   * 'webpack-dev-server/client' добавится при параметре --inline
+   * 'webpack/hot/dev-server' и HotModuleReplacementPlugin добавится при параметре --hot
+   */
   entry: {
-    'app': './index.js'
+    'app': ['webpack-dev-server/client', 'webpack/hot/dev-server', './index.js']
   },
 
   output: {
@@ -50,7 +54,12 @@ const webpackConfig = {
      */
     new webpack.DefinePlugin({
       __DEV__: JSON.stringify(isDev)
-    })
+    }),
+
+    /**
+     * Нужен для работы hot replacement
+     */
+    new webpack.HotModuleReplacementPlugin()
   ],
 
   resolve: {
@@ -97,7 +106,7 @@ const webpackConfig = {
           {
             loader: 'file-loader',
             options: {
-              name: '[path][name].[ext]',
+              name: '[path][name].[ext]?[hash]',
               outputPath: 'static/assets/',
               publicPath: '/dist/static/assets/'
             }
@@ -117,7 +126,12 @@ const webpackConfig = {
     /**
      * По какому пути относительно корня сервера, будет доступен / положен билд
      */
-    publicPath: '/dist/'
+    publicPath: '/dist/',
+
+    /**
+     * Реждим hot replacement
+     */
+    hot: true
   }
 }
 
