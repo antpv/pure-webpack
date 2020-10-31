@@ -1,23 +1,38 @@
-import { greetingText } from './messages'
+// import { Observable } from 'rxjs'
+// import { interval, map } from 'rxjs/operators'
+
+// const stream$ = new Observable(subscriber => {
+//   subscriber.next({
+//     items: []
+//   })
+// }).pipe(
+//   interval(1000, v => v),
+//   map(payload => ({
+//     ...payload,
+//     loading: true
+//   })
+// )
+
+
+// stream$.subscribe(payload => {
+//   console.log(payload)
+// })
+// ***
+
 import './main.scss'
 
-const doc = document
-const app = doc.getElementById('app')
+// Push skeletons
+const wrapper = document.body.querySelector('.async-swipe-wrapper')
+const createSkeleton = value => `<div class="async-swipe-wrapper__skeleton">${value}</div>`
+let renderSkeletonsCount = 30
 
-doc.addEventListener('DOMContentLoaded', () => {
-  const button = doc.getElementById('button')
+while (renderSkeletonsCount--) {
+  wrapper.innerHTML += createSkeleton(`Skeleton ${renderSkeletonsCount}`)
+}
 
-  button.innerText = greetingText
+// Code
+console.log('test')
 
-  button.onclick = () => {
-    setTimeout(() => {
-      import('./messages-async')
-        .then(asyncModule => {
-          const morty = doc.createElement('div')
-          morty.classList.add('morty')
-
-          app.appendChild(morty)
-        })
-    }, 3000)
-  }
+wrapper.addEventListener('touchstart', (e) => {
+  console.log(e)
 })
