@@ -1,34 +1,9 @@
-header {
-  padding: 24px 0;
-  text-align: center;
-  margin: 24px auto;
-  width: 160px;
-}
-
-.async-swipe-wrapper {
-  height: 640px;
-  width: 500px;
-  margin: 24px auto;
-  padding: 24px;
-  border: 1px solid #f0f0f0;
-  box-shadow: #00000011 0 1px 3px;
+.container {
+  border: 2px solid #e7e7e7;
   border-radius: 6px;
-  overflow: scroll;
-
-  &__skeleton {
-    height: 100px;
-    background: #bee3db;
-    border-radius: 4px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #555b6e;
-    margin-bottom: 24px;
-    border: 1px solid #1a535c;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
+  min-width: 600px;
+  min-height: 600px;
+  width: 600px;
+  height: 600px;
+  display: inline-block;
 }
